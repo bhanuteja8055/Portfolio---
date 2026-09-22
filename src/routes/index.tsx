@@ -116,7 +116,7 @@ function Portfolio() {
       </header>
 
       <main id="top" className="mx-auto max-w-6xl px-4 sm:px-6">
-        <section className="grid min-h-[calc(100svh-5rem)] items-center gap-10 py-14 sm:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:py-16">
+        <section className="grid items-center gap-8 py-10 sm:gap-10 sm:py-16 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
           <div className="min-w-0">
             <div className="hero-rise inline-flex items-center gap-2 rounded-full border border-glass-edge bg-glass px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand backdrop-blur-xl">
               <span className="size-1.5 rounded-full bg-brand" /> AI / ML Engineer
@@ -140,7 +140,7 @@ function Portfolio() {
               <div><dt className="font-display text-2xl font-bold text-brand sm:text-3xl">30+</dt><dd className="mt-1 text-xs uppercase tracking-[0.08em] text-ink-soft">FPS real-time</dd></div>
             </dl>
           </div>
-          <div className="hero-rise hero-delay-2 relative mx-auto w-full max-w-sm">
+          <div className="hero-rise hero-delay-2 relative mx-auto w-full max-w-[13rem] sm:max-w-xs lg:max-w-sm">
             <div className="portrait-glow" aria-hidden="true" />
             <img src={portraitAsset.url} alt="Professional portrait of Ketha Bhanu Teja" width={590} height={615} className="relative aspect-[4/5] w-full rounded-[2rem] border border-glass-edge object-cover object-top shadow-portrait" />
             <div className="absolute -bottom-4 left-4 right-4 rounded-2xl border border-glass-edge bg-glass-strong px-4 py-3 text-center backdrop-blur-xl">
