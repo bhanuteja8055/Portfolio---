@@ -143,8 +143,8 @@ function Portfolio() {
           <div className="hero-rise hero-delay-2 relative mx-auto w-full max-w-[9rem] sm:max-w-xs lg:max-w-sm">
             <div className="portrait-glow" aria-hidden="true" />
             <img src={portraitAsset.url} alt="Professional portrait of Ketha Bhanu Teja" width={590} height={615} className="relative aspect-[4/5] w-full rounded-[2rem] border border-glass-edge object-cover object-top shadow-portrait" />
-            <div className="absolute -bottom-4 left-4 right-4 rounded-2xl border border-glass-edge bg-glass-strong px-4 py-3 text-center backdrop-blur-xl">
-              <p className="font-display text-sm font-semibold text-ink">Ravulapalem, Andhra Pradesh, India</p>
+            <div className="absolute -bottom-3 -left-8 -right-8 rounded-2xl border border-glass-edge bg-glass-strong px-2 py-2 text-center backdrop-blur-xl sm:-bottom-4 sm:left-4 sm:right-4 sm:px-4 sm:py-3">
+              <p className="whitespace-nowrap font-display text-[10px] font-semibold text-ink sm:text-sm">Ravulapalem, Andhra Pradesh, India</p>
             </div>
           </div>
         </section>
