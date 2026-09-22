@@ -116,25 +116,25 @@ function Portfolio() {
       </header>
 
       <main id="top" className="mx-auto max-w-6xl px-4 sm:px-6">
-        <section className="grid items-center gap-8 py-10 sm:gap-10 sm:py-16 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
-          <div className="min-w-0">
+        <section className="grid min-h-[calc(100svh-5.5rem)] items-center gap-8 py-10 sm:min-h-[calc(100svh-6rem)] sm:gap-10 sm:py-12 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="min-w-0 text-center">
             <div className="hero-rise inline-flex items-center gap-2 rounded-full border border-glass-edge bg-glass px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand backdrop-blur-xl">
               <span className="size-1.5 rounded-full bg-brand" /> AI / ML Engineer
             </div>
             <h1 className="hero-rise hero-delay-1 mt-6 font-display text-5xl font-bold leading-[1.04] text-ink sm:text-6xl lg:text-7xl">
               Ketha Bhanu<br />Teja
             </h1>
-            <p className="hero-rise hero-delay-2 mt-5 max-w-2xl font-display text-xl font-semibold text-ink sm:text-2xl">
+            <p className="hero-rise hero-delay-2 mx-auto mt-5 max-w-2xl font-display text-xl font-semibold text-ink sm:text-2xl">
               Building intelligent systems that see, retrieve, and reason.
             </p>
-            <p className="hero-rise hero-delay-3 mt-3 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
+            <p className="hero-rise hero-delay-3 mx-auto mt-3 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
               End-to-end machine learning pipelines, computer vision, and retrieval-augmented generation — from research to working products.
             </p>
-            <div className="hero-rise hero-delay-4 mt-8 flex flex-wrap items-center gap-3">
+            <div className="hero-rise hero-delay-4 mt-8 flex flex-wrap items-center justify-center gap-3">
               <a href="#projects" className="primary-action">View projects</a>
               <a href="#contact" className="secondary-action">Get in touch</a>
             </div>
-            <dl className="hero-rise hero-delay-4 mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-glass-edge pt-6">
+            <dl className="hero-rise hero-delay-4 mx-auto mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-glass-edge pt-6">
               <div><dt className="font-display text-2xl font-bold text-brand sm:text-3xl">92%</dt><dd className="mt-1 text-xs uppercase tracking-[0.08em] text-ink-soft">Validation accuracy</dd></div>
               <div><dt className="font-display text-2xl font-bold text-brand sm:text-3xl">35%</dt><dd className="mt-1 text-xs uppercase tracking-[0.08em] text-ink-soft">Retrieval lift</dd></div>
               <div><dt className="font-display text-2xl font-bold text-brand sm:text-3xl">30+</dt><dd className="mt-1 text-xs uppercase tracking-[0.08em] text-ink-soft">FPS real-time</dd></div>
