@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ExternalLink, Mail, Menu, Pencil, RotateCcw, X } from "lucide-react";
+import { Download, ExternalLink, Mail, Menu, Pencil, RotateCcw, Send, X } from "lucide-react";
 import { type FormEvent, useEffect, useState } from "react";
 import { z } from "zod";
 
@@ -75,6 +75,61 @@ const projectSchema = z.object({
     "Enter a full link beginning with http:// or https://.",
   ),
 });
+
+const contactSchema = z.object({
+  name: z.string().trim().min(2, "Enter your name.").max(80, "Keep your name under 80 characters."),
+  email: z.string().trim().email("Enter a valid email address.").max(254),
+  subject: z.string().trim().min(3, "Add a short subject.").max(120, "Keep the subject under 120 characters."),
+  message: z.string().trim().min(10, "Write at least 10 characters.").max(2000, "Keep your message under 2,000 characters."),
+  website: z.string().max(0),
+});
+
+function ContactForm() {
+  const [error, setError] = useState("");
+
+  const validateForm = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const result = contactSchema.safeParse(Object.fromEntries(form.entries()));
+    if (!result.success) {
+      setError(result.error.issues[0]?.message ?? "Check your details and try again.");
+      return;
+    }
+    setError("Email delivery is waiting for sender-domain setup. Please use the email link for now.");
+  };
+
+  return (
+    <form onSubmit={validateForm} className="rounded-lg border border-glass-edge bg-glass-strong p-5 sm:p-7" noValidate>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-2">
+          <Label htmlFor="contact-name">Name</Label>
+          <Input id="contact-name" name="name" autoComplete="name" maxLength={80} required placeholder="Your name" />
+        </div>
+        <div className="grid gap-2">
+          <Label htmlFor="contact-email">Email</Label>
+          <Input id="contact-email" name="email" type="email" autoComplete="email" maxLength={254} required placeholder="you@example.com" />
+        </div>
+      </div>
+      <div className="mt-4 grid gap-2">
+        <Label htmlFor="contact-subject">Subject</Label>
+        <Input id="contact-subject" name="subject" maxLength={120} required placeholder="How can I help?" />
+      </div>
+      <div className="mt-4 grid gap-2">
+        <Label htmlFor="contact-message">Message</Label>
+        <Textarea id="contact-message" name="message" maxLength={2000} required rows={6} placeholder="Tell me about the opportunity or project." />
+      </div>
+      <div className="absolute -left-[9999px]" aria-hidden="true">
+        <Label htmlFor="contact-website">Website</Label>
+        <Input id="contact-website" name="website" tabIndex={-1} autoComplete="off" />
+      </div>
+      {error && <p role="alert" className="mt-4 rounded-md bg-brand-faint px-3 py-2 text-sm font-medium text-brand">{error}</p>}
+      <Button type="submit" className="mt-5 w-full sm:w-auto">
+        <Send /> Send message
+      </Button>
+      <p className="mt-3 text-xs leading-relaxed text-ink-soft">Message delivery activates after the sender domain is connected.</p>
+    </form>
+  );
+}
 
 type Project = z.infer<typeof projectSchema>;
 
@@ -340,6 +395,7 @@ function Portfolio() {
             <div className="hero-rise hero-delay-4 mt-5 flex flex-wrap items-center justify-center gap-3 sm:mt-8">
               <a href="#projects" className="primary-action">View projects</a>
               <a href="#contact" className="secondary-action">Get in touch</a>
+              <a href="/Ketha_Bhanu_Teja_Resume.pdf" download="Ketha_Bhanu_Teja_Resume.pdf" className="secondary-action"><Download size={17} /> Download résumé</a>
             </div>
             <dl className="hero-rise hero-delay-4 mx-auto mt-6 grid max-w-lg grid-cols-3 gap-4 border-t border-glass-edge pt-4 sm:mt-10 sm:pt-6">
               <div><dt className="font-display text-2xl font-bold text-brand sm:text-3xl">92%</dt><dd className="mt-1 text-xs uppercase tracking-[0.08em] text-ink-soft">Validation accuracy</dd></div>
@@ -442,14 +498,22 @@ function Portfolio() {
         </section>
 
         <section id="contact" className="scroll-mt-28 py-14 pb-24 sm:py-20 sm:pb-28">
-          <div className="reveal contact-panel p-7 sm:p-14">
-            <p className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-brand">Contact</p>
-            <h2 className="mt-4 max-w-2xl font-display text-3xl font-bold text-ink sm:text-5xl">Let’s build something intelligent.</h2>
-            <p className="mt-4 max-w-xl leading-relaxed text-ink-soft">Open to AI/ML engineering opportunities, collaborations, and conversations about practical machine learning.</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <a href="mailto:bhanuteja725@gmail.com" className="primary-action"><Mail size={17} /> bhanuteja725@gmail.com</a>
-              <a href="https://linkedin.com/in/KethaBhanuTeja" target="_blank" rel="noreferrer" className="secondary-action">LinkedIn <ExternalLink size={15} /></a>
-              <a href="https://github.com/bhanuteja8055" target="_blank" rel="noreferrer" className="secondary-action">GitHub <ExternalLink size={15} /></a>
+          <div className="reveal contact-panel p-7 sm:p-10 lg:p-14">
+            <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+              <div>
+                <p className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-brand">Contact</p>
+                <h2 className="mt-4 font-display text-3xl font-bold text-ink sm:text-5xl">Let’s build something intelligent.</h2>
+                <p className="mt-4 leading-relaxed text-ink-soft">Open to AI/ML engineering opportunities, collaborations, and conversations about practical machine learning.</p>
+                <div className="mt-8 flex flex-col items-start gap-3">
+                  <a href="mailto:bhanuteja725@gmail.com" className="primary-action max-w-full"><Mail size={17} /> <span className="truncate">bhanuteja725@gmail.com</span></a>
+                  <div className="flex flex-wrap gap-3">
+                    <a href="https://linkedin.com/in/KethaBhanuTeja" target="_blank" rel="noreferrer" className="secondary-action">LinkedIn <ExternalLink size={15} /></a>
+                    <a href="https://github.com/bhanuteja8055" target="_blank" rel="noreferrer" className="secondary-action">GitHub <ExternalLink size={15} /></a>
+                  </div>
+                  <a href="/Ketha_Bhanu_Teja_Resume.pdf" download="Ketha_Bhanu_Teja_Resume.pdf" className="secondary-action"><Download size={17} /> Download résumé</a>
+                </div>
+              </div>
+              <ContactForm />
             </div>
           </div>
           <footer className="mt-8 flex flex-col gap-2 text-center text-xs text-ink-soft sm:flex-row sm:justify-between sm:text-left">
