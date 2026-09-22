@@ -116,35 +116,35 @@ function Portfolio() {
       </header>
 
       <main id="top" className="mx-auto max-w-6xl px-4 sm:px-6">
-        <section className="grid items-center gap-8 py-10 sm:gap-10 sm:py-16 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
-          <div className="min-w-0">
+        <section className="grid min-h-[calc(100svh-5.5rem)] items-center gap-5 py-6 sm:min-h-[calc(100svh-6rem)] sm:gap-10 sm:py-12 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="min-w-0 text-center">
             <div className="hero-rise inline-flex items-center gap-2 rounded-full border border-glass-edge bg-glass px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand backdrop-blur-xl">
               <span className="size-1.5 rounded-full bg-brand" /> AI / ML Engineer
             </div>
-            <h1 className="hero-rise hero-delay-1 mt-6 font-display text-5xl font-bold leading-[1.04] text-ink sm:text-6xl lg:text-7xl">
+            <h1 className="hero-rise hero-delay-1 mt-4 font-display text-5xl font-bold leading-[1.04] text-ink sm:mt-6 sm:text-6xl lg:text-7xl">
               Ketha Bhanu<br />Teja
             </h1>
-            <p className="hero-rise hero-delay-2 mt-5 max-w-2xl font-display text-xl font-semibold text-ink sm:text-2xl">
+            <p className="hero-rise hero-delay-2 mx-auto mt-3 max-w-2xl font-display text-lg font-semibold text-ink sm:mt-5 sm:text-2xl">
               Building intelligent systems that see, retrieve, and reason.
             </p>
-            <p className="hero-rise hero-delay-3 mt-3 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
+            <p className="hero-rise hero-delay-3 mx-auto mt-2 max-w-xl text-sm leading-relaxed text-ink-soft sm:mt-3 sm:text-lg">
               End-to-end machine learning pipelines, computer vision, and retrieval-augmented generation — from research to working products.
             </p>
-            <div className="hero-rise hero-delay-4 mt-8 flex flex-wrap items-center gap-3">
+            <div className="hero-rise hero-delay-4 mt-5 flex flex-wrap items-center justify-center gap-3 sm:mt-8">
               <a href="#projects" className="primary-action">View projects</a>
               <a href="#contact" className="secondary-action">Get in touch</a>
             </div>
-            <dl className="hero-rise hero-delay-4 mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-glass-edge pt-6">
+            <dl className="hero-rise hero-delay-4 mx-auto mt-6 grid max-w-lg grid-cols-3 gap-4 border-t border-glass-edge pt-4 sm:mt-10 sm:pt-6">
               <div><dt className="font-display text-2xl font-bold text-brand sm:text-3xl">92%</dt><dd className="mt-1 text-xs uppercase tracking-[0.08em] text-ink-soft">Validation accuracy</dd></div>
               <div><dt className="font-display text-2xl font-bold text-brand sm:text-3xl">35%</dt><dd className="mt-1 text-xs uppercase tracking-[0.08em] text-ink-soft">Retrieval lift</dd></div>
               <div><dt className="font-display text-2xl font-bold text-brand sm:text-3xl">30+</dt><dd className="mt-1 text-xs uppercase tracking-[0.08em] text-ink-soft">FPS real-time</dd></div>
             </dl>
           </div>
-          <div className="hero-rise hero-delay-2 relative mx-auto w-full max-w-[13rem] sm:max-w-xs lg:max-w-sm">
+          <div className="hero-rise hero-delay-2 relative mx-auto w-full max-w-[9rem] sm:max-w-xs lg:max-w-sm">
             <div className="portrait-glow" aria-hidden="true" />
             <img src={portraitAsset.url} alt="Professional portrait of Ketha Bhanu Teja" width={590} height={615} className="relative aspect-[4/5] w-full rounded-[2rem] border border-glass-edge object-cover object-top shadow-portrait" />
-            <div className="absolute -bottom-4 left-4 right-4 rounded-2xl border border-glass-edge bg-glass-strong px-4 py-3 text-center backdrop-blur-xl">
-              <p className="font-display text-sm font-semibold text-ink">Ravulapalem, Andhra Pradesh, India</p>
+            <div className="absolute -bottom-3 -left-8 -right-8 rounded-2xl border border-glass-edge bg-glass-strong px-2 py-2 text-center backdrop-blur-xl sm:-bottom-4 sm:left-4 sm:right-4 sm:px-4 sm:py-3">
+              <p className="whitespace-nowrap font-display text-[10px] font-semibold text-ink sm:text-sm">Ravulapalem, Andhra Pradesh, India</p>
             </div>
           </div>
         </section>
