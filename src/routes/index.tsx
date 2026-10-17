@@ -216,7 +216,8 @@ function ProjectCard({
 
   return (
     <>
-      <article className="reveal glass-card group flex h-full flex-col overflow-hidden">
+      <div className="tilt-wrap h-full" onPointerMove={tiltMove} onPointerLeave={tiltReset}>
+      <article className="reveal glass-card tilt-card group flex h-full flex-col overflow-hidden">
         <img src={media.src} alt={media.alt} width={1024} height={640} loading="lazy" className="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-[1.02]" />
         <div className="flex flex-1 flex-col p-6">
           <div className="flex items-start justify-between gap-3">
@@ -378,8 +379,15 @@ function Portfolio() {
       </header>
 
       <main id="top" className="mx-auto max-w-6xl px-4 sm:px-6">
-        <section className="grid min-h-[calc(100svh-5.5rem)] items-center gap-5 py-6 sm:min-h-[calc(100svh-6rem)] sm:gap-10 sm:py-12 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="min-w-0 text-center">
+        <section className="relative grid min-h-[calc(100svh-5.5rem)] items-center gap-5 py-6 sm:min-h-[calc(100svh-6rem)] sm:gap-10 sm:py-12 lg:grid-cols-[1.15fr_0.85fr]">
+          <div aria-hidden className="pointer-events-none absolute inset-y-0 left-1/2 -z-0 w-screen -translate-x-1/2 opacity-80">
+            <ClientOnly fallback={null}>
+              <Suspense fallback={null}>
+                <NeuralScene />
+              </Suspense>
+            </ClientOnly>
+          </div>
+          <div className="relative z-10 min-w-0 text-center">
             <div className="hero-rise inline-flex items-center gap-2 rounded-full border border-glass-edge bg-glass px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand backdrop-blur-xl">
               <span className="size-1.5 rounded-full bg-brand" /> AI / ML Engineer
             </div>
