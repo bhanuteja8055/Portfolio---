@@ -1,6 +1,24 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { ClientOnly, createFileRoute } from "@tanstack/react-router";
 import { Download, ExternalLink, Mail, Menu, Pencil, RotateCcw, Send, X } from "lucide-react";
-import { type FormEvent, useEffect, useState } from "react";
+import { type FormEvent, type PointerEvent as ReactPointerEvent, Suspense, lazy, useEffect, useState } from "react";
+
+const NeuralScene = lazy(() => import("@/components/NeuralScene"));
+
+function tiltMove(e: ReactPointerEvent<HTMLDivElement>) {
+  if (e.pointerType !== "mouse") return;
+  const el = e.currentTarget;
+  const r = el.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width - 0.5;
+  const y = (e.clientY - r.top) / r.height - 0.5;
+  el.style.setProperty("--rx", `${(-y * 8).toFixed(2)}deg`);
+  el.style.setProperty("--ry", `${(x * 10).toFixed(2)}deg`);
+  el.style.setProperty("--mx", `${((x + 0.5) * 100).toFixed(1)}%`);
+  el.style.setProperty("--my", `${((y + 0.5) * 100).toFixed(1)}%`);
+}
+function tiltReset(e: ReactPointerEvent<HTMLDivElement>) {
+  e.currentTarget.style.setProperty("--rx", "0deg");
+  e.currentTarget.style.setProperty("--ry", "0deg");
+}
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -240,6 +258,7 @@ function ProjectCard({
           )}
         </div>
       </article>
+      </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-h-[90svh] w-[calc(100%-2rem)] overflow-y-auto border-glass-edge bg-card text-card-foreground sm:max-w-xl">
