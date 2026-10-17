@@ -1,8 +1,9 @@
 import { ClientOnly, createFileRoute } from "@tanstack/react-router";
 import { Download, ExternalLink, Mail, Menu, Pencil, RotateCcw, Send, X } from "lucide-react";
+import type React from "react";
 import { type FormEvent, type PointerEvent as ReactPointerEvent, Suspense, lazy, useEffect, useState } from "react";
 
-const NeuralScene = lazy(() =>
+const NeuralScene = lazy<() => React.ReactElement | null>(() =>
   import("@/components/NeuralScene").catch(() => ({ default: () => null })),
 );
 
