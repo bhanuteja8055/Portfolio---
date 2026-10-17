@@ -106,7 +106,7 @@ export default function NeuralScene() {
   const mobile = typeof window !== "undefined" && window.innerWidth < 768;
   const still = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   return (
-    <Canvas dpr={[1, 1.75]} camera={{ position: [0, 0, 11], fov: 50 }} gl={{ alpha: true, antialias: true }}>
+    <Canvas dpr={[1, 1.75]} camera={{ position: [0, 0, 14], fov: 50 }} gl={{ alpha: true, antialias: true }}>
       <ambientLight intensity={0.9} />
       <directionalLight position={[5, 6, 8]} intensity={1.6} />
       <directionalLight position={[-6, -2, 3]} intensity={0.5} color="#e8dccb" />

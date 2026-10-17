@@ -399,7 +399,7 @@ function Portfolio() {
 
       <main id="top" className="mx-auto max-w-6xl px-4 sm:px-6">
         <section className="relative grid min-h-[calc(100svh-5.5rem)] items-center gap-5 py-6 sm:min-h-[calc(100svh-6rem)] sm:gap-10 sm:py-12 lg:grid-cols-[1.15fr_0.85fr]">
-          <div aria-hidden className="pointer-events-none absolute inset-y-0 left-1/2 -z-0 w-screen -translate-x-1/2 opacity-80">
+          <div aria-hidden className="pointer-events-none absolute inset-y-0 left-1/2 -z-0 w-screen -translate-x-1/2 opacity-45">
             <ClientOnly fallback={null}>
               <Suspense fallback={null}>
                 <NeuralScene />
