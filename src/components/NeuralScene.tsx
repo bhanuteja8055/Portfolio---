@@ -28,8 +28,8 @@ function Network({ count, still }: { count: number; still: boolean }) {
     );
     const pos = new Float32Array(edges.length * 6);
     edges.forEach(([i, j], k) => {
-      nodes[i].toArray(pos, k * 6);
-      nodes[j].toArray(pos, k * 6 + 3);
+      nodes[i]!.toArray(pos, k * 6);
+      nodes[j]!.toArray(pos, k * 6 + 3);
     });
     const lineGeo = new THREE.BufferGeometry();
     lineGeo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
@@ -40,7 +40,7 @@ function Network({ count, still }: { count: number; still: boolean }) {
   useEffect(() => {
     const m = new THREE.Matrix4();
     nodes.forEach((p, i) => {
-      const s = 0.09 + ((i * 37) % 10) / 70;
+      const s = 0.06 + ((i * 37) % 10) / 110;
       m.makeScale(s, s, s).setPosition(p);
       nodeRef.current?.setMatrixAt(i, m);
       nodeRef.current?.setColorAt(i, new THREE.Color(i % 3 === 0 ? WARM : i % 2 ? NAVY : STEEL));
@@ -76,9 +76,9 @@ function Network({ count, still }: { count: number; still: boolean }) {
     g.position.z += (-scroll.current * 4 - g.position.z) * k;
     const t = still ? 0 : state.clock.elapsedTime;
     for (let p = 0; p < PULSES; p++) {
-      const [i, j] = edges[(p * 7) % edges.length];
+      const [i, j] = edges[(p * 7) % edges.length]!;
       const f = (t * 0.45 + p * 0.37) % 1;
-      v.lerpVectors(nodes[i], nodes[j], f);
+      v.lerpVectors(nodes[i]!, nodes[j]!, f);
       tmp.makeScale(0.06, 0.06, 0.06).setPosition(v);
       pulses.current?.setMatrixAt(p, tmp);
     }
