@@ -1,6 +1,27 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { ClientOnly, createFileRoute } from "@tanstack/react-router";
 import { Download, ExternalLink, Mail, Menu, Pencil, RotateCcw, Send, X } from "lucide-react";
-import { type FormEvent, useEffect, useState } from "react";
+import type React from "react";
+import { type FormEvent, type PointerEvent as ReactPointerEvent, Suspense, lazy, useEffect, useState } from "react";
+
+const NeuralScene = lazy<() => React.ReactElement | null>(() =>
+  import("@/components/NeuralScene").catch(() => ({ default: () => null })),
+);
+
+function tiltMove(e: ReactPointerEvent<HTMLDivElement>) {
+  if (e.pointerType !== "mouse") return;
+  const el = e.currentTarget;
+  const r = el.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width - 0.5;
+  const y = (e.clientY - r.top) / r.height - 0.5;
+  el.style.setProperty("--rx", `${(-y * 8).toFixed(2)}deg`);
+  el.style.setProperty("--ry", `${(x * 10).toFixed(2)}deg`);
+  el.style.setProperty("--mx", `${((x + 0.5) * 100).toFixed(1)}%`);
+  el.style.setProperty("--my", `${((y + 0.5) * 100).toFixed(1)}%`);
+}
+function tiltReset(e: ReactPointerEvent<HTMLDivElement>) {
+  e.currentTarget.style.setProperty("--rx", "0deg");
+  e.currentTarget.style.setProperty("--ry", "0deg");
+}
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -216,7 +237,8 @@ function ProjectCard({
 
   return (
     <>
-      <article className="reveal glass-card group flex h-full flex-col overflow-hidden">
+      <div className="tilt-wrap h-full" onPointerMove={tiltMove} onPointerLeave={tiltReset}>
+      <article className="reveal glass-card tilt-card group flex h-full flex-col overflow-hidden">
         <img src={media.src} alt={media.alt} width={1024} height={640} loading="lazy" className="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-[1.02]" />
         <div className="flex flex-1 flex-col p-6">
           <div className="flex items-start justify-between gap-3">
@@ -239,6 +261,7 @@ function ProjectCard({
           )}
         </div>
       </article>
+      </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-h-[90svh] w-[calc(100%-2rem)] overflow-y-auto border-glass-edge bg-card text-card-foreground sm:max-w-xl">
@@ -378,8 +401,15 @@ function Portfolio() {
       </header>
 
       <main id="top" className="mx-auto max-w-6xl px-4 sm:px-6">
-        <section className="grid min-h-[calc(100svh-5.5rem)] items-center gap-5 py-6 sm:min-h-[calc(100svh-6rem)] sm:gap-10 sm:py-12 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="min-w-0 text-center">
+        <section className="relative grid min-h-[calc(100svh-5.5rem)] items-center gap-5 py-6 sm:min-h-[calc(100svh-6rem)] sm:gap-10 sm:py-12 lg:grid-cols-[1.15fr_0.85fr]">
+          <div aria-hidden className="pointer-events-none absolute inset-y-0 left-1/2 -z-0 w-screen -translate-x-1/2 opacity-45">
+            <ClientOnly fallback={null}>
+              <Suspense fallback={null}>
+                <NeuralScene />
+              </Suspense>
+            </ClientOnly>
+          </div>
+          <div className="relative z-10 min-w-0 text-center">
             <div className="hero-rise inline-flex items-center gap-2 rounded-full border border-glass-edge bg-glass px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand backdrop-blur-xl">
               <span className="size-1.5 rounded-full bg-brand" /> AI / ML Engineer
             </div>

@@ -357,8 +357,13 @@
 .hero-delay-2 { animation-delay: 160ms; }
 .hero-delay-3 { animation-delay: 240ms; }
 .hero-delay-4 { animation-delay: 320ms; }
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity 650ms cubic-bezier(.22,1,.36,1), transform 650ms cubic-bezier(.22,1,.36,1); }
-.reveal.is-visible { opacity: 1; transform: translateY(0); }
+main { perspective: 1400px; }
+.reveal { opacity: 0; transform: translateY(28px) rotateX(10deg) scale(0.98); transform-origin: 50% 100%; transition: opacity 750ms cubic-bezier(.22,1,.36,1), transform 750ms cubic-bezier(.22,1,.36,1); }
+.reveal.is-visible { opacity: 1; transform: none; }
+.tilt-wrap { perspective: 900px; --rx: 0deg; --ry: 0deg; --mx: 50%; --my: 50%; }
+.tilt-card.is-visible { transform: rotateX(var(--rx)) rotateY(var(--ry)); transition: transform 200ms ease-out, opacity 750ms ease; position: relative; }
+.tilt-card::after { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; opacity: 0; transition: opacity 250ms; background: radial-gradient(circle at var(--mx) var(--my), color-mix(in oklab, var(--ink-contrast) 45%, transparent), transparent 55%); }
+.tilt-wrap:hover .tilt-card::after { opacity: 1; }
 
 @keyframes hero-rise { to { opacity: 1; transform: translateY(0); } }
 
@@ -368,6 +373,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero-rise, .reveal { opacity: 1; transform: none; animation: none; transition: none; }
+  .hero-rise, .reveal, .tilt-card.is-visible { opacity: 1; transform: none; animation: none; transition: none; }
+  .tilt-card::after { display: none; }
   .group img, .primary-action { transition: none; }
 }
